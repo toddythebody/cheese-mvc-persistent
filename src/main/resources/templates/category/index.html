@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+    <h1 th:text="${title}">Default Title</h1>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <p th:unless="${types} and ${types.size()}">No Cheese Types</p>
+
+    <ul>
+        <div th:each="type : ${types}">
+            <li th:text="${type.name}"></li>
+        </div>
+    </ul>
+
+    <a href="/category/add"><input type="button" value="Add Cheese Type" /></a>
+
+</body>
+</html>
