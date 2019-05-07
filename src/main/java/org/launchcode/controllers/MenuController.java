@@ -67,6 +67,8 @@ public class MenuController {
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
     public String addItemProcess(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors) {
         if (errors.hasErrors()) {
+            form.setMenu(menuDao.findOne(form.getMenuId()));
+            form.setCheeses(cheeseDao.findAll());
             String title = "Add item to menu: " + form.getMenu().getName();
             model.addAttribute("title", title);
             model.addAttribute("form", form);
