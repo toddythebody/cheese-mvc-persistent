@@ -103,10 +103,9 @@ public class CheeseController {
                                   @RequestParam int categoryId) {
 
         if (errors.hasErrors()) {
-            String title = "Editing " + newCheese.getName() + "(Id# " + newCheese.getId() + ")";
+            newCheese.setCategory(categoryDao.findOne(categoryId));
+            String title = "Editing " + cheeseDao.findOne(cheeseId).getName() + "(Id# " + cheeseDao.findOne(cheeseId).getId() + ")";
             model.addAttribute("title", title);
-            Cheese theCheese = cheeseDao.findOne(cheeseId);
-            model.addAttribute("theCheese", theCheese);
             model.addAttribute("categories", categoryDao.findAll());
             return "cheese/edit";
         }
