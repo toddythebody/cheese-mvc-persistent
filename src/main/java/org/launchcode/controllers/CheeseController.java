@@ -83,4 +83,41 @@ public class CheeseController {
         return "cheese/index";
     }
 
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int cheeseId) {
+
+        Cheese theCheese = cheeseDao.findOne(cheeseId);
+        String title = "Editing " + theCheese.getName() + "(Id# " + theCheese.getId() + ")";
+
+        model.addAttribute("title", title);
+        model.addAttribute("theCheese", theCheese);
+        model.addAttribute(theCheese);
+        model.addAttribute("categories", categoryDao.findAll());
+
+        return "cheese/edit";
+    }
+
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable int cheeseId,
+                                  @ModelAttribute @Valid Cheese newCheese, Errors errors, Model model,
+                                  @RequestParam int categoryId) {
+
+        if (errors.hasErrors()) {
+            String title = "Editing " + newCheese.getName() + "(Id# " + newCheese.getId() + ")";
+            model.addAttribute("title", title);
+            Cheese theCheese = cheeseDao.findOne(cheeseId);
+            model.addAttribute("theCheese", theCheese);
+            model.addAttribute("categories", categoryDao.findAll());
+            return "cheese/edit";
+        }
+
+        Category cat = categoryDao.findOne(categoryId);
+        Cheese theCheese = cheeseDao.findOne(cheeseId);
+        theCheese.setName(newCheese.getName());
+        theCheese.setDescription(newCheese.getDescription());
+        theCheese.setCategory(cat);
+        cheeseDao.save(theCheese);
+        return "redirect:/cheese";
+    }
+
 }
