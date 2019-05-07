@@ -10,7 +10,9 @@
 
     <ul>
         <div th:each="type : ${types}">
-            <li th:text="${type.name}"></li>
+            <li>
+                <a th:href="@{'/cheese/category/' + ${type.id}}" th:text="${type.name}"></a>
+            </li>
         </div>
     </ul>
 
