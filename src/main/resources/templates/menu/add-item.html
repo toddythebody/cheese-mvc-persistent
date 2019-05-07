@@ -15,6 +15,7 @@
                 </select>
             </div>
             <input type="hidden" name="menuId" th:value="*{menu.id}" />
+            <div th:errors="*{cheeseId}"></div>
             <input type="submit" value="Add Cheese" />
         </form>
 

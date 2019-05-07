@@ -16,7 +16,7 @@ public class AddMenuItemForm {
     @NotNull
     private int menuId;
 
-    @NotNull
+    @NotNull(message = "You're a hacker. Leave my cheese alone.")
     private int cheeseId;
 
     public AddMenuItemForm() { }
