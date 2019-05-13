@@ -15,7 +15,7 @@ public class Menu {
     @GeneratedValue
     private int id;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z]{3,15}$", message = "3 to 15 characters, no spaces")
+    @Pattern(regexp = "^[\\w ']{3,15}$", message = "3 to 15 characters")
     private String name;
     @ManyToMany
     private List<Cheese> cheeses;
